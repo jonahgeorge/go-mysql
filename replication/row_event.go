@@ -87,9 +87,17 @@ func (e *TableMapEvent) Decode(data []byte) error {
 	}
 
 	e.NullBitmap = data[pos : pos+nullBitmapSize]
+	pos += nullBitmapSize
 
 	// TODO: handle optional field meta
+	if err = e.decodeOptionalMetadataFields(data[pos:]); err != nil {
+		return errors.Trace(err)
+	}
 
+	return nil
+}
+
+func (e *TableMapEvent) decodeOptionalMetadataFields(data []byte) error {
 	return nil
 }
 

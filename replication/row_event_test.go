@@ -62,6 +62,16 @@ var DecodeDecimalsEquals = &decodeDecimalChecker{
 	&CheckerInfo{Name: "Equals", Params: []string{"obtainedValue", "obtainedPos", "obtainedErr", "expectedValue", "expectedPos", "expectedErr", "caseNumber"}},
 }
 
+func (_ *testDecodeSuite) TestJonah(c *C) {
+	data := []byte{160, 0, 0, 0, 0, 0, 1, 0, 3, 97, 112, 105, 0, 6, 109, 101, 109, 98, 101, 114, 0, 2, 3, 252, 1, 2, 0, 1, 1, 0, 2, 3, 252, 255, 0, 4, 16, 2, 105, 100, 12, 98, 105, 108, 108, 105, 110, 103, 95, 110, 97, 109, 101, 8, 1, 0}
+
+	event := new(TableMapEvent)
+	err := event.Decode(data)
+	c.Assert(err, IsNil)
+
+	fmt.Printf("%+v\n", event)
+}
+
 func (_ *testDecodeSuite) TestDecodeDecimal(c *C) {
 	// _PLACEHOLDER_ := 0
 	testcases := []struct {
